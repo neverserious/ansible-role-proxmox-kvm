@@ -1,6 +1,6 @@
 ---
 - include: create.yml
-  when: proxmox_create
+  when: proxmox_create|default(True)
 
 - include: destroy.yml
-  when: proxmox_destroy
+  when: proxmox_destroy|default(False)
