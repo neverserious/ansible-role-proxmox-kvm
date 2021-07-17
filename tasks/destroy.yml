@@ -1,4 +1,5 @@
-- name: "Stop VM {{ proxmox_vm_name }} with force"
+- name: "Stop VM with force"
+  delegate_to: localhost
   proxmox_kvm:
     api_host: "{{ proxmox_api_host }}"
     api_user: "{{ proxmox_api_user }}"
@@ -7,7 +8,8 @@
     state: stopped
     force: yes
 
-- name: "Delete VM {{ proxmox_vm_name }} with force"
+- name: "Delete VM with force"
+  delegate_to: localhost
   proxmox_kvm:
     api_host: "{{ proxmox_api_host }}"
     api_user: "{{ proxmox_api_user }}"
