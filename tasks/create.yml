@@ -33,7 +33,7 @@
     agent: "{{ proxmox_guest_agent | default(omit) }}"
     state: "present"
     pool: "{{ proxmox_resource_pool | default(omit) }}"
-  return: results
+  register: results
 
 
 - name: "Start VM"
