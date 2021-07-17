@@ -14,7 +14,7 @@
   proxmox_kvm:
     api_host: "{{ proxmox_api_host }}"
     api_user: "{{ proxmox_api_user }}"
-    api_password: "{{ proxmox_api_pass | default(omit) }}" # Stick this in a private var file, please.
+    api_password: "{{ proxmox_api_pass }}"
     vmid: "{{ proxmox_vm_id | default(omit) }}"
     net:
       net0: "{{ proxmox_net_type }}{{ proxmox_net_mac }},bridge=vmbr{{ proxmox_net_bridge }}"
@@ -29,8 +29,8 @@
     node: "{{ proxmox_target_host | default(omit) }}"
     boot: "{{ proxmox_boot_order | default(omit) }}"
     bootdisk: "{{ proxmox_boot_disk }}"
-    onboot: "{{ proxmox_auto_boot }}"
-    agent: "{{ proxmox_guest_agent }}"
+    onboot: "{{ proxmox_auto_boot | default(omit) }}"
+    agent: "{{ proxmox_guest_agent | default(omit) }}"
     state: "present"
     pool: "{{ proxmox_resource_pool | default(omit) }}"
   return: results
