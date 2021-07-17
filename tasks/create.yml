@@ -28,7 +28,7 @@
     name: "{{ proxmox_vm_name | default(omit) }}"
     node: "{{ proxmox_target_host | default(omit) }}"
     boot: "{{ proxmox_boot_order | default(omit) }}"
-    bootdisk: "{{ proxmox_boot_disk | default(onit) }}"
+    bootdisk: "{{ proxmox_boot_disk | default(omit) }}"
     onboot: "{{ proxmox_auto_boot | default(omit) }}"
     agent: "{{ proxmox_guest_agent | default(omit) }}"
     state: "present"
