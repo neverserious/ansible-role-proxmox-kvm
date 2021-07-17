@@ -1,6 +1,6 @@
 - name: "Stop VM {{ proxmox_vm_name }} with force"
   proxmox_kvm:
-    api_host: "{{ proxmox_node }}"
+    api_host: "{{ proxmox_api_host }}"
     api_user: "{{ proxmox_api_user }}"
     api_password: "{{ proxmox_api_pass }}"
     vmid: "{{ proxmox_vm_id }}"
@@ -9,7 +9,7 @@
 
 - name: "Delete VM {{ proxmox_vm_name }} with force"
   proxmox_kvm:
-    api_host: "{{ proxmox_target_node }}"
+    api_host: "{{ proxmox_api_host }}"
     api_user: "{{ proxmox_api_user }}"
     api_password: "{{ proxmox_api_pass }}"
     vmid: "{{ proxmox_vm_id }}"
