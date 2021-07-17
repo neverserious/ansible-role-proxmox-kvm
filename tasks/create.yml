@@ -7,7 +7,7 @@
 # Add an equal sign to the mac address to fit in the net0 line
 - set_fact:
     proxmox_disk_options: ",{{ proxmox_disk_options }}"
-  when: (proxmox_disk_options is defined) and (proxmox_disk_options|length > 0)
+  when: proxmox_disk_options is defined
 - debug: var=proxmox_disk_options
 - name: "Ensure VM exists"
   delegate_to: localhost
