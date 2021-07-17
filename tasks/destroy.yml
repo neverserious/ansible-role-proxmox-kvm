@@ -7,6 +7,7 @@
     vmid: "{{ proxmox_vm_id }}"
     state: stopped
     force: yes
+    timeout: 3600
 
 - name: "Delete VM with force"
   delegate_to: localhost
@@ -16,3 +17,4 @@
     api_password: "{{ proxmox_api_pass }}"
     vmid: "{{ proxmox_vm_id }}"
     state: absent
+    timeout: 3600
