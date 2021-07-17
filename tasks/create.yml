@@ -7,8 +7,8 @@
 # Add an equal sign to the mac address to fit in the net0 line
 - set_fact:
     proxmox_disk_options: ",{{ proxmox_disk_options }}"
-  when: (proxmox_disk_options is defined) and (proxmox_disk_options|length > 0)
-
+  when: proxmox_disk_options is defined
+# - debug: var=proxmox_disk_options
 - name: "Ensure VM exists"
   delegate_to: localhost
   proxmox_kvm:
@@ -17,9 +17,9 @@
     api_password: "{{ proxmox_api_pass }}"
     vmid: "{{ proxmox_vm_id | default(omit) }}"
     net:
-      net0: "{{ proxmox_net_type }}{{ proxmox_net_mac }},bridge=vmbr{{ proxmox_net_bridge }}"
+      net0: "{{ proxmox_net_type }}{{ proxmox_net_mac | default('') }},bridge=vmbr{{ proxmox_net_bridge }}"
     scsi:
-      scsi0: "{{ proxmox_storage_pool }}:{{ proxmox_storage_size }},format={{ proxmox_storage_format }}{{ proxmox_disk_options }}"
+      scsi0: "{{ proxmox_storage_pool }}:{{ proxmox_storage_size }},format={{ proxmox_storage_format }}{{ proxmox_disk_options | default('') }}"
     scsihw: "{{ proxmox_scsi_hardware }}"
     cores: "{{ proxmox_cpu_cores | default(omit) }}"
     sockets: "{{ proxmox_cpu_sockets | default(omit) }}"
@@ -28,12 +28,13 @@
     name: "{{ proxmox_vm_name | default(omit) }}"
     node: "{{ proxmox_target_host | default(omit) }}"
     boot: "{{ proxmox_boot_order | default(omit) }}"
-    bootdisk: "{{ proxmox_boot_disk }}"
+    bootdisk: "{{ proxmox_boot_disk | default(omit) }}"
     onboot: "{{ proxmox_auto_boot | default(omit) }}"
     agent: "{{ proxmox_guest_agent | default(omit) }}"
     state: "present"
     pool: "{{ proxmox_resource_pool | default(omit) }}"
-  return: results
+  register: results
+
 
 - name: "Start VM"
   delegate_to: localhost
@@ -43,13 +44,3 @@
     api_password: "{{ proxmox_api_pass | default(omit)}}" # Stick this in a private var file, please.
     vmid: "{{ results.vmid }}"
     state: started
-# - name: "Wait for VMs to become Johnny Five"
-#   delegate_to: localhost
-#   script:
-#     cmd: files/find_vm_ip.sh {{ proxmox_vm_id }} {{ proxmox_hosts }}
-#   register: vm_ip
-#
-# - set_fact:
-#     ansible_host: "{{ vm_ip.stdout | trim }}"
-#     ansible_ssh_host: "{{ vm_ip.stdout | trim }}"
-#   when: inventory_hostname == 'gentoo-autobuild'

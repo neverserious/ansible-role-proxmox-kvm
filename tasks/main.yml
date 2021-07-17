@@ -1,5 +1,6 @@
 ---
-include: create.yml
+- include: create.yml
+  when: proxmox_create
 
-include: destroy.yml
-when: false
+- include: destroy.yml
+  when: proxmox_destroy

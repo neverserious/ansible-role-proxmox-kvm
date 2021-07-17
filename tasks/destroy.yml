@@ -1,0 +1,20 @@
+- name: "Stop VM with force"
+  delegate_to: localhost
+  proxmox_kvm:
+    api_host: "{{ proxmox_api_host }}"
+    api_user: "{{ proxmox_api_user }}"
+    api_password: "{{ proxmox_api_pass }}"
+    vmid: "{{ proxmox_vm_id }}"
+    state: stopped
+    force: yes
+    timeout: 3600
+
+- name: "Delete VM with force"
+  delegate_to: localhost
+  proxmox_kvm:
+    api_host: "{{ proxmox_api_host }}"
+    api_user: "{{ proxmox_api_user }}"
+    api_password: "{{ proxmox_api_pass }}"
+    vmid: "{{ proxmox_vm_id }}"
+    state: absent
+    timeout: 3600
