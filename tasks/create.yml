@@ -8,7 +8,7 @@
 - set_fact:
     proxmox_disk_options: ",{{ proxmox_disk_options }}"
   when: (proxmox_disk_options is defined) and (proxmox_disk_options|length > 0)
-
+- debug: var=proxmox_disk_options
 - name: "Ensure VM exists"
   delegate_to: localhost
   proxmox_kvm:
