@@ -17,4 +17,5 @@
     api_password: "{{ proxmox_api_pass }}"
     vmid: "{{ proxmox_vm_id }}"
     state: absent
+    force: yes
     timeout: 3600
