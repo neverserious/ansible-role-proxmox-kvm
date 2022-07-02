@@ -8,3 +8,4 @@ proxmox_storage_pool: local
 proxmox_storage_size: 32
 proxmox_storage_format: qcow2
 proxmox_scsi_hardware: virtio-scsi-pci
+proxmox_start_vm: True
