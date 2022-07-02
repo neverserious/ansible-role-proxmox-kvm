@@ -46,4 +46,4 @@
     api_password: "{{ proxmox_api_pass | default(omit)}}" # Stick this in a private var file, please.
     vmid: "{{ proxmox_vm_id }}"
     state: started
-  when: proxmox_start_vm
+  when: proxmox_start_vm|default(True)
