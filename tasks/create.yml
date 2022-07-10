@@ -14,6 +14,7 @@
     validate_certs: "{{ proxmox_validate_certs | default(omit) }}"
     api_user: "{{ proxmox_api_user }}"
     api_password: "{{ proxmox_api_pass }}"
+    proxmox_default_behavior: no_defaults
     vmid: "{{ proxmox_vm_id | default(omit) }}"
     net:
       net0: "{{ proxmox_net_type }}{{ proxmox_net_mac | default('') }},bridge=vmbr{{ proxmox_net_bridge }}"
