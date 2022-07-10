@@ -3,7 +3,8 @@ proxmox_api_host: localhost
 proxmox_api_user: root@pam
 proxmox_api_pass: "{{ proxmox_api_pass | default(omit) }}"
 proxmox_net_type: virtio
-proxmox_net_bridge: 0   # You can specify vlan by adding a : followed by the VLAN ID -  0:1234 for VLAN 1234 on bridge 0
+proxmox_net_bridge: 0
+#proxmox_net_vlan: Set this to desired vlan ID
 proxmox_storage_pool: local
 proxmox_storage_size: 32
 proxmox_storage_format: qcow2

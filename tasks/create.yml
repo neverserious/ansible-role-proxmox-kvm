@@ -3,6 +3,9 @@
 - set_fact:
     proxmox_net_mac: "={{ proxmox_net_mac }}"
   when: (proxmox_net_mac is defined) and (proxmox_net_mac|length > 0)
+- set_fact:
+    proxmox_net_vlan: ",trunks={{ proxmox_net_vlan }}"
+  when: (proxmox_net_vlan is defined) and (proxmox_net_vlan|length > 0)
 
 - set_fact:
     proxmox_disk_options: ",{{ proxmox_disk_options }}"
@@ -17,7 +20,7 @@
     proxmox_default_behavior: no_defaults
     vmid: "{{ proxmox_vm_id | default(omit) }}"
     net:
-      net0: "{{ proxmox_net_type }}{{ proxmox_net_mac | default('') }},bridge=vmbr{{ proxmox_net_bridge }}"
+      net0: "{{ proxmox_net_type }}{{ proxmox_net_mac | default('') }},bridge=vmbr{{ proxmox_net_bridge }}{{ proxmox_net_vlan }}"
     scsi:
       scsi0: "{{ proxmox_storage_pool }}:{{ proxmox_storage_size }},format={{ proxmox_storage_format }}{{ proxmox_disk_options | default('') }}"
     scsihw: "{{ proxmox_scsi_hardware }}"
