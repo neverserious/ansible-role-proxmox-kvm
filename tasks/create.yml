@@ -5,7 +5,7 @@
   when: (proxmox_net_mac is defined) and (proxmox_net_mac|length > 0)
 - set_fact:
     proxmox_net_vlan: ",trunks={{ proxmox_net_vlan }}"
-  when: (proxmox_net_vlan is defined) and (proxmox_net_vlan|length > 0)
+  when: proxmox_net_vlan is defined
 
 - set_fact:
     proxmox_disk_options: ",{{ proxmox_disk_options }}"
