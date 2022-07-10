@@ -4,7 +4,7 @@
     proxmox_net_mac: "={{ proxmox_net_mac }}"
   when: (proxmox_net_mac is defined) and (proxmox_net_mac|length > 0)
 - set_fact:
-    proxmox_net_vlan: ",trunks={{ proxmox_net_vlan }}"
+    proxmox_net_vlan: ",tag={{ proxmox_net_vlan }}"
   when: proxmox_net_vlan is defined
 
 - set_fact:
